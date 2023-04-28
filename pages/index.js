@@ -25,6 +25,11 @@ export default function Home() {
         <h2>My Heartbeat</h2>
         <h1>{data.data[0].bpm}</h1>
         <pre>{new Date(data.data[0].timestamp).toLocaleTimeString()}</pre>
+        <p style={{
+        
+        }}>
+          {JSON.stringify(data.data)}
+        </p>
       </main>
     </>
   );

@@ -11,8 +11,9 @@ export default function handler(req, res) {
   };
 
   const startDate = new Date();
-  startDate.setHours(8);
+  startDate.setHours(1);
   const endDate = new Date();
+  endDate.setHours(24)
 
   fetch(
     `https://api.ouraring.com/v2/usercollection/heartrate?start_datetime=${startDate.toJSON()}&end_datetime=${endDate.toJSON()}`,
