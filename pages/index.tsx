@@ -1,10 +1,6 @@
 import Head from "next/head";
-import {CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis} from 'recharts';
-import useSwr from "swr";
 import {CssVarsProvider} from "@mui/joy";
-import Heartrate from "../components/heartrate";
-
-
+import Heartrate from "../components/Heartrate";
 
 export default function Home() {
 
