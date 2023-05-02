@@ -1,4 +1,4 @@
-import {Heartrate} from "../../models";
+import {Activity, Heartrate} from "../../models";
 
 const ouraApiAccessToken = "BVQIHXLPXQD65Q7AWMFBR5MJTB6HDB3O";
 
@@ -12,17 +12,17 @@ export default function handler(req, res) {
     };
 
     const startDate = new Date();
-    startDate.setHours(1);
+    startDate.setHours(0);
     const endDate = new Date();
     endDate.setHours(24)
 
     fetch(
-        `https://api.ouraring.com/v2/usercollection/heartrate?start_datetime=${startDate.toJSON()}&end_datetime=${endDate.toJSON()}`,
+        `https://api.ouraring.com/v2/usercollection/daily_activity?start_datetime=${startDate.toJSON()}&end_datetime=${endDate.toJSON()}`,
         requestOptions
     )
         .then((response) => response.json())
         .then((result: {
-            data: Heartrate[]
+            data: Activity[]
         }) => {
             res.status(200).json(result);
         })

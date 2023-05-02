@@ -1,10 +1,10 @@
-import {Box, Sheet, Typography} from "@mui/joy";
+import {Box, Divider, Sheet, Typography} from "@mui/joy";
 import {CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis} from "recharts";
 import useSwr from "swr";
 import {Heartrate} from "../models";
 import moment from "moment";
 import Lottie from "lottie-react";
-import heartBeatAnimation from '../assets/9427-heartbeat.json';
+import animation from '../assets/9427-heartbeat.json';
 import _ from "lodash";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -30,14 +30,22 @@ export default () => {
         {/*<Typography level={'h2'} sx={{mr: 4}}>Heart rate</Typography>*/}
 
             <Box sx={{width: 96, mr: 4}}>
-                <Lottie animationData={heartBeatAnimation} loop={true}/>
+                <Lottie animationData={animation} loop={true}/>
             </Box>
 
             <Typography level={'h1'} sx={{mr: 1}}>{_.last(heartBeatData).bpm}</Typography>
 
-            <Box sx={{  alignItems:'center' }}>
-            <Typography level={'body1'}>BPM</Typography>
-            <Typography level={'body1'}>Fetched from my Oura ring {moment(_.last(heartBeatData).date).fromNow()}</Typography>
+            <Box sx={{alignItems: 'center'}}>
+                <Typography level={'body1'}>BPM</Typography>
+                <Typography level={'body2'}>{moment(_.last(heartBeatData).date).fromNow()}</Typography>
+            </Box>
+
+            <Divider  sx={{mr: 2, ml: 2}} orientation={'vertical'}/>
+
+            <Typography level={'h1'} sx={{mr: 1}}>{(_.sumBy(heartBeatData, 'bpm'))}</Typography>
+            <Box sx={{alignItems: 'center'}}>
+                <Typography level={'body1'}>Total heart beats</Typography>
+                <Typography level={'body2'}></Typography>
             </Box>
         </Box>
 

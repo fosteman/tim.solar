@@ -1,6 +1,9 @@
 import Head from "next/head";
-import {CssVarsProvider} from "@mui/joy";
+import {Grid} from "@mui/material";
 import Heartrate from "../components/Heartrate";
+import Activity from "../components/Bioreactor";
+import {CssVarsProvider} from "@mui/joy";
+import Bioreactor from "../components/MovingAround";
 
 export default function Home() {
 
@@ -15,7 +18,11 @@ export default function Home() {
             </Head>
 
             <main>
-                <Heartrate/>
+                <Grid container spacing={2}>
+                    <Grid item><Heartrate/></Grid>
+                    <Grid item><Activity/></Grid>
+                    <Grid item><Bioreactor/></Grid>
+                </Grid>
             </main>
         </>
     );
