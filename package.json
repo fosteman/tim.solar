@@ -1,11 +1,12 @@
 {
-  "name": "nextjs",
+  "name": "tim.solar",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "deploy": "npm version patch --force && vercel"
   },
   "dependencies": {
     "@types/chartjs": "^0.0.31",
