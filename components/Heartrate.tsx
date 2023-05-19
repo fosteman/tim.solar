@@ -6,23 +6,22 @@ import moment from "moment";
 import Lottie from "lottie-react";
 import animation from '../assets/9427-heartbeat.json';
 import _ from "lodash";
+import {List, ListItem, ListItemButton, ListItemText} from "@mui/material";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default () => {
-    const {data, error, isLoading} = useSwr<{
-        data: Heartrate[]
-    }>("/api/heartrate", fetcher);
-
-    const heartBeatData = data?.data.map(datum => ({
-        date: new Date(datum.timestamp).valueOf(),
-        bpm: datum.bpm
-    }));
+    const {data, error, isLoading} = useSwr<Heartrate[]>("/api/heartrate", fetcher);
 
     if (error)
         return <div>Failed to get my vitals. Maybe the avatar is down.</div>;
     if (isLoading) return <div>Loading my vitals...</div>;
     if (!data) return null;
+
+    const heartBeatData = data.map(datum => ({
+        date: new Date(datum.timestamp).valueOf(),
+        bpm: datum.bpm
+    }));
 
 
     return <Sheet variant={'soft'} color={'neutral'} sx={{width: 'fit-content', p: 2}}>

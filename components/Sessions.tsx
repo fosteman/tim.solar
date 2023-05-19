@@ -1,36 +1,40 @@
-import {Box, Sheet, Typography} from "@mui/joy";
+import {Box, Sheet} from "@mui/joy";
 import useSwr from "swr";
-import {Activity} from "../models";
+import {Activity, Workout} from "../models";
 import Lottie from "lottie-react";
 import animation from '../assets/28973-nuclear-sign.json';
 import _ from "lodash";
+import {List, ListItem, ListItemButton, ListItemText, Typography} from "@mui/material";
+import moment from "moment";
+import {LocalFireDepartment, LocalFireDepartmentOutlined, Timer, TimerOutlined} from "@mui/icons-material";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default () => {
-    const {data, error, isLoading} = useSwr<{ data: Activity[] }>("/api/sessions", fetcher);
-
-    const lastActivity: Activity | null = _.last(data?.data);
+    const {data, error, isLoading} = useSwr<Workout[]>("/api/sessions", fetcher);
 
     if (error)
         return <div>Failed to get my vitals. Maybe the avatar is down.</div>;
     if (isLoading) return <div>Loading my vitals...</div>;
     if (!data) return null;
 
+    console.log(data)
+
     return <Sheet variant={'soft'} color={'neutral'} sx={{width: 'fit-content', p: 2}}>
-        <Box sx={{display: 'flex', height: 120, alignItems: 'center'}}>
-            {/*<Typography level={'h2'} sx={{mr: 4}}>Heart rate</Typography>*/}
+        <List>
+            {data.map(datum => {
+                const SecondaryLine = <Box sx={{display: 'flex', alignItems: 'center'}}>
+                    <Typography variant={'body2'}>{moment(datum.start_datetime).format('HH:MM A')}</Typography>
+                    <TimerOutlined /> {moment(datum.end_datetime).diff(datum.start_datetime, 'minutes')} minutes
+                    <LocalFireDepartmentOutlined /> {datum.calories} Cal
+                </Box>;
 
-            <Box sx={{width: 96, mr: 4}}>
-                <Lottie animationData={animation} loop={true}/>
-            </Box>
-
-            <Typography level={'h2'} sx={{mr: 1}}>{lastActivity?.total_calories}</Typography>
-
-            <Box sx={{alignItems: 'center'}}>
-                <Typography level={'body1'}>Calories</Typography>
-                <Typography level={'body2'}>My bioreactor's output</Typography>
-            </Box>
-        </Box>
+                return <ListItem>
+                    <ListItemButton>
+                        <ListItemText primary={datum.activity} secondary={SecondaryLine}></ListItemText>
+                    </ListItemButton>
+                </ListItem>
+            })}
+        </List>
     </Sheet>
 }
