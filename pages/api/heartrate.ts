@@ -10,9 +10,7 @@ export default function handler(req, res) {
     endDate.setHours(24)
 
     return requestOuraApi(`usercollection/heartrate?start_datetime=${startDate.toJSON()}&end_datetime=${endDate.toJSON()}`)
-        .then((result: {
-            data: Heartrate[]
-        }) => {
+        .then((result: Heartrate[]) => {
             res.status(200).json(result);
         })
         .catch((error) => console.log("error", error));

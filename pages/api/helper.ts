@@ -17,6 +17,6 @@ export const requestOuraApi = (url: string) => {
     )
         .then((response) => response.json())
         .then((result: {
-            data: Workout[]
+            data: any[]
         }) => result.data)
 }
