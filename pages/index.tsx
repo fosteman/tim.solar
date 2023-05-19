@@ -4,6 +4,7 @@ import Heartrate from "../components/Heartrate";
 import Activity from "../components/Bioreactor";
 import {CssVarsProvider} from "@mui/joy";
 import Bioreactor from "../components/MovingAround";
+import Sessions from "../components/Sessions";
 
 export default function Home() {
 
@@ -22,6 +23,7 @@ export default function Home() {
                     <Grid item><Heartrate/></Grid>
                     <Grid item><Activity/></Grid>
                     <Grid item><Bioreactor/></Grid>
+                    <Grid item><Sessions/></Grid>
                 </Grid>
             </main>
         </>

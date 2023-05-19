@@ -32,3 +32,16 @@ export interface Activity {
     day: string;
     timestamp: string;
 }
+
+export interface Workout {
+    id: string
+    activity: string
+    calories: number
+    day: string
+    distance: null | number,
+    end_datetime: string,
+    intensity: 'easy' | 'moderate' | 'hard',
+    label: null | string,
+    source: string
+    start_datetime: string
+}

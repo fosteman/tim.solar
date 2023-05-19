@@ -1,6 +1,7 @@
 import {Heartrate} from "../../models";
 
-const ouraApiAccessToken = "BVQIHXLPXQD65Q7AWMFBR5MJTB6HDB3O";
+// to whom ever concerned with my key - it's been revoked and re-installed.
+const ouraApiAccessToken = process.env.ouraApiAccessToken;
 
 export default function handler(req, res) {
     var myHeaders = new Headers();
