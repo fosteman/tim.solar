@@ -7,7 +7,7 @@ export default function handler(req, res) {
     const startDate = new Date();
     startDate.setHours(1);
     const endDate = new Date();
-    endDate.setHours(24)
+    endDate.setHours(23)
 
     return requestOuraApi(`usercollection/heartrate?start_datetime=${startDate.toJSON()}&end_datetime=${endDate.toJSON()}`)
         .then((result: Heartrate[]) => {

@@ -24,6 +24,8 @@ export default () => {
     }));
 
 
+    const lastBPMDatum = _.last(heartBeatData);
+
     return <Sheet variant={'soft'} color={'neutral'} sx={{width: 'fit-content', p: 2}}>
         <Box sx={{display: 'flex', height: 80, alignItems:'center'}}>
         {/*<Typography level={'h2'} sx={{mr: 4}}>Heart rate</Typography>*/}
@@ -32,20 +34,13 @@ export default () => {
                 <Lottie animationData={animation} loop={true}/>
             </Box>
 
-            <Typography level={'h1'} sx={{mr: 1}}>{_.last(heartBeatData).bpm}</Typography>
+            <Typography level={'h1'} sx={{mr: 1}}>{lastBPMDatum?.bpm}</Typography>
 
             <Box sx={{alignItems: 'center'}}>
                 <Typography level={'body1'}>BPM</Typography>
-                <Typography level={'body2'}>{moment(_.last(heartBeatData).date).fromNow()}</Typography>
+                <Typography level={'body2'}>{moment(lastBPMDatum?.date).fromNow()}</Typography>
             </Box>
 
-            <Divider  sx={{mr: 2, ml: 2}} orientation={'vertical'}/>
-
-            <Typography level={'h1'} sx={{mr: 1}}>{(_.sumBy(heartBeatData, 'bpm'))}</Typography>
-            <Box sx={{alignItems: 'center'}}>
-                <Typography level={'body1'}>Total heart beats</Typography>
-                <Typography level={'body2'}></Typography>
-            </Box>
         </Box>
 
 
